@@ -1,0 +1,12 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "google/gemini-2.0-flash",
+  "provider": {
+    "google": {
+      "apiKey": "{env:GEMINI_API_KEY}"
+    },
+    "groq": {
+      "apiKey": "{env:GROQ_API_KEY}"
+    }
+  }
+}

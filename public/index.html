@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111827"><title>Dantoking Dashboard</title>
+  <link rel="stylesheet" href="/dashboard.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">D</span><span>Dantoking</span></div>
+      <nav><a class="nav-link active" href="#dashboard">⌂ <span>Dashboard</span></a><a class="nav-link" href="#messages">▤ <span>Pesan</span></a><a class="nav-link" href="#contacts">♙ <span>Kontak</span></a><a class="nav-link" href="#teachings">◎ <span>Ajaran</span></a></nav>
+      <div class="sidebar-foot"><span class="status-dot"></span> Sistem aktif</div>
+    </aside>
+    <main class="main">
+      <header class="topbar"><div><p class="eyebrow">PANEL PRIBADI</p><h1>Dantoking</h1><p id="date-label" class="muted">Memuat waktu...</p></div><button id="refresh" class="button secondary">↻ Refresh</button></header>
+      <section id="dashboard" class="view">
+        <div class="section-heading"><div><h2>Ringkasan</h2><p class="muted">Gambaran pesan dan aktivitas terbaru.</p></div><span id="server-status" class="pill success">● Aktif</span></div>
+        <div class="stats-grid">
+          <article class="stat-card accent clickable-card" data-filter-tag=""><span>Total pesan</span><strong id="stat-total">—</strong><small>Semua sumber · klik untuk detail</small></article>
+          <article class="stat-card clickable-card" data-filter-tag="hr"><span>HR</span><strong id="stat-hr">—</strong><small>Rekrutmen & personalia · lihat pesan</small></article>
+          <article class="stat-card clickable-card" data-filter-tag="klien"><span>Klien</span><strong id="stat-klien">—</strong><small>Project & pekerjaan · lihat pesan</small></article>
+          <article class="stat-card clickable-card" data-filter-tag=""><span>Hari ini</span><strong id="stat-today">—</strong><small id="timezone">Asia/Jakarta · semua kategori</small></article>
+        </div>
+        <div class="charts-grid"><article class="panel"><div class="panel-title"><div><h3>Distribusi kategori</h3><p class="muted">Klasifikasi pesan tersimpan</p></div></div><div class="donut-wrap"><div id="donut" class="donut"><div><strong id="donut-total">—</strong><span>pesan</span></div></div><div id="legend" class="legend"></div></div></article><article class="panel"><div class="panel-title"><div><h3>Aktivitas 7 hari</h3><p class="muted">Jumlah pesan per hari</p></div></div><div id="activity-chart" class="bar-chart"></div></article></div>
+        <div class="content-grid"><article class="panel"><div class="panel-title"><div><h3>Pesan terbaru</h3><p class="muted">Data paling baru dari WhatsApp</p></div><a class="text-link" href="#messages">Lihat semua →</a></div><div id="latest-list" class="message-list"><div class="loading">Memuat...</div></div></article><article class="panel"><div class="panel-title"><div><h3>Status collector</h3><p class="muted">Koneksi WhatsApp terjadwal</p></div></div><div id="collector-status" class="status-box">Memuat...</div><div class="mini-stats"><div><strong id="stat-teachings">—</strong><span>Ajaran aktif</span></div><div><strong id="stat-corrections">—</strong><span>Koreksi</span></div></div></article></div>
+      </section>
+      <section id="messages" class="view hidden"><div class="section-heading"><div><h2>Pesan WhatsApp</h2><p class="muted">Cari, filter, dan buka pesan berdasarkan ID.</p></div></div><article class="panel"><div class="filters"><input id="search" type="search" placeholder="Cari isi, pengirim, atau ID..."><select id="tag-filter"><option value="">Semua kategori</option><option value="hr">HR</option><option value="klien">Klien</option><option value="pribadi">Pribadi</option><option value="promo">Promo</option></select><button id="search-button" class="button primary">Cari</button></div><div class="table-wrap"><table><thead><tr><th>ID</th><th>Waktu</th><th>Kategori</th><th>Chat / pengirim</th><th>Pesan</th></tr></thead><tbody id="messages-body"></tbody></table></div><div class="pagination"><span id="table-info" class="muted"></span><div><button id="prev-page" class="button secondary">←</button><button id="next-page" class="button secondary">→</button></div></div></article></section>
+      <section id="teachings" class="view hidden"><div class="section-heading"><div><h2>Ajaran aktif</h2><p class="muted">Aturan yang dipakai bot saat menganalisis data.</p></div></div><article class="panel"><div id="teachings-list" class="teaching-list"><div class="loading">Memuat...</div></div></article></section>
+      <section id="contacts" class="view hidden"><div class="section-heading"><div><h2>Kontak WhatsApp</h2><p class="muted">Nama tersimpan, nama profil, dan nomor yang muncul di pesan.</p></div></div><article class="panel"><div class="filters"><input id="contact-search" type="search" placeholder="Cari nama atau nomor..."><select id="contact-type"><option value="">Semua tipe</option><option value="person">Pribadi</option><option value="group">Grup</option></select><select id="contact-saved"><option value="">Semua status</option><option value="yes">Tersimpan</option><option value="no">Belum tersimpan</option></select><button id="contact-search-button" class="button primary">Cari</button></div><div class="table-wrap"><table><thead><tr><th>Nama</th><th>Nomor / JID</th><th>Tipe</th><th>Status</th><th>Pesan</th><th>Terakhir</th></tr></thead><tbody id="contacts-body"></tbody></table></div><div class="pagination"><span id="contacts-info" class="muted"></span><div><button id="contacts-prev" class="button secondary">←</button><button id="contacts-next" class="button secondary">→</button></div></div></article></section>
+    </main>
+  </div>
+  <div id="modal" class="modal hidden"><div class="modal-card"><button id="modal-close" class="modal-close">×</button><p class="eyebrow">DETAIL PESAN</p><h2 id="modal-title">Pesan</h2><div id="modal-content"></div></div></div>
+  <script src="/dashboard.js"></script>
+</body>
+</html>
