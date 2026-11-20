@@ -7,6 +7,10 @@ async function ask(prompt) {
     { name: 'Groq', url: 'https://api.groq.com/openai/v1/chat/completions',
       headers: { Authorization: `Bearer ${process.env.GROQ_API_KEY}` },
       body: { model: 'openai/gpt-oss-20b', messages: [{ role: 'user', content: prompt }] },
+      text: d => d.choices?.[0]?.message?.content },
+    { name: 'OpenAI', url: 'https://api.xingchiapi.com/v1/chat/completions',
+      headers: { Authorization: `Bearer ${process.env.OPENAI_API_KEY}` },
+      body: { model: process.env.OPENAI_MODEL || 'gpt-4o-mini', messages: [{ role: 'user', content: prompt }] },
       text: d => d.choices?.[0]?.message?.content }
   ];
   for (const provider of options) {
@@ -20,7 +24,7 @@ async function ask(prompt) {
       return text;
     } catch { console.warn(`${provider.name}: permintaan gagal, mencoba penyedia berikutnya.`); }
   }
-  throw new Error('Gemini dan Groq belum dapat menjawab. Coba beberapa saat lagi.');
+  throw new Error('Gemini, Groq, dan OpenAI belum dapat menjawab. Coba beberapa saat lagi.');
 }
 async function askJson(prompt) {
   const providers = [
@@ -31,6 +35,10 @@ async function askJson(prompt) {
     { name: 'Groq', url: 'https://api.groq.com/openai/v1/chat/completions',
       headers: { Authorization: `Bearer ${process.env.GROQ_API_KEY}` },
       body: { model: 'openai/gpt-oss-20b', temperature: 0.1, max_tokens: 700, response_format: { type: 'json_object' }, messages: [{ role: 'user', content: prompt }] },
+      text: d => d.choices?.[0]?.message?.content },
+    { name: 'OpenAI', url: 'https://api.xingchiapi.com/v1/chat/completions',
+      headers: { Authorization: `Bearer ${process.env.OPENAI_API_KEY}` },
+      body: { model: process.env.OPENAI_MODEL || 'gpt-4o-mini', temperature: 0.1, max_tokens: 700, response_format: { type: 'json_object' }, messages: [{ role: 'user', content: prompt }] },
       text: d => d.choices?.[0]?.message?.content }
   ];
   for (const provider of providers) {
